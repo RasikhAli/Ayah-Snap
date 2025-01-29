@@ -5,10 +5,10 @@ Ayah-Snap is a web app that displays random verses (Ayahs) from the Quran along 
 ## Screenshots
 
 ### Ayah Display
-![Screenshot 1](assets/snap1.png)
+![Screenshot 1](assets/snap1.PNG)
 
 ### Ayah + Translation Display
-![Screenshot 2](assets/snap2.png)
+![Screenshot 2](assets/snap2.PNG)
 
 ## Features
 - Displays a random Ayah from the Quran.
