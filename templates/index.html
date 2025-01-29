@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayah-Snap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
+            color: white;
+            text-align: center;
+            padding-left: 50px;
+            padding-right: 50px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            justify-content: center;
+        }
+
+        /* Title */
+        h1 {
+            font-size: 48px;
+            font-weight: bold;
+            text-shadow: 4px 4px 15px rgba(255, 255, 0, 0.5);
+            margin-bottom: 30px;
+            color: #f8f8f8;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Ayah Card */
+        .ayah-card {
+            background: rgba(255, 255, 255, 0.12);
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            display: inline-block;
+            max-width: 80%;
+            transition: transform 0.3s ease-in-out;
+            animation: fadeIn 1.5s ease-in-out, floatUp 3s infinite ease-in-out;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .ayah-card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Arabic Ayah */
+        .ayah {
+            font-size: 38px;
+            font-family: 'Amiri', serif;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            direction: rtl;
+            color: #f8f8f8;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Surah Info */
+        .surah-info {
+            font-size: 22px;
+            font-style: italic;
+            color: #f1c40f;
+            margin-top: 10px;
+            text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Translate Button */
+        .translate-btn {
+            background-color: #f1c40f;
+            color: #2c3e50;
+            font-size: 18px;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .translate-btn:hover {
+            background-color: #f39c12;
+            transform: scale(1.05);
+        }
+
+        /* Refresh Button */
+        .refresh-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #ff9f43;
+            border: none;
+            color: white;
+            font-size: 24px;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .refresh-btn:hover {
+            background: #ff7b00;
+            transform: scale(1.2);
+            box-shadow: 0px 0px 20px rgba(255, 165, 0, 0.9);
+        }
+
+        /* Fade-in & Floating Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floatUp {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <h1>📖 Ayah-Snap</h1>
+    <div class="ayah-card">
+        <div class="ayah">{{ ayah }}</div>
+        <p class="surah-info">(Surah {{ surah_name }}, Ayah {{ ayah_number }})</p>
+        <p id="translation"></p>
+    </div>
+
+    <button class="translate-btn" onclick="getTranslation()">Translate</button>
+
+    <!-- Refresh Button -->
+    <button class="refresh-btn" onclick="window.location.reload()">
+        <i class="fas fa-sync-alt"></i>
+    </button>
+
+    <script>
+        // Function to fetch translation from the server
+        function getTranslation() {
+            fetch('/get_translation')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("translation").textContent = data.translation;
+                })
+                .catch(error => console.log('Error fetching translation:', error));
+        }
+    </script>
+</body>
+</html>
