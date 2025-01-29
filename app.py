@@ -39,8 +39,6 @@ def get_random_ayah():
 
             # Fetch translation
             translation_response = requests.get(f"{QURAN_API_URL}ayah/{surah}:{ayah_number}/en.asad")
-            print(surah, ayah_number)
-            print(surah, ayah_number_in_surah)
             translation_text = "No translation available"
             if translation_response.status_code == 200:
                 translation_data = translation_response.json()

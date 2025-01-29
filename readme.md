@@ -2,6 +2,14 @@
 
 Ayah-Snap is a web app that displays random verses (Ayahs) from the Quran along with their translation. It uses Flask as the backend framework, fetches data from the [Al-Quran Cloud API](https://alquran.cloud/), and dynamically renders the information on the frontend.
 
+## Screenshots
+
+### Ayah Display
+![Screenshot 2](assets/snap1.png)
+
+### Ayah + Translation Display
+![Screenshot 2](assets/snap2.png)
+
 ## Features
 - Displays a random Ayah from the Quran.
 - Shows the Surah name and Ayah number.
