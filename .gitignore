@@ -1,4 +1,10 @@
 templates/prev.html
+templates/new.html
+
 /venv
+
 assets/screenshot1.png
 assets/screenshot2.png
+
+appnew.py
+appold.py

@@ -127,6 +127,29 @@
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-5px); }
         }
+
+        /* Translations Layout */
+        .translations {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .translations p {
+            display: inline-block;
+            width: 48%;
+            text-align: left;
+            font-size: 24px;
+        }
+
+        .translations .urdu {
+            text-align: right;
+            direction: rtl;
+        }
+
+        .translations.hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -134,10 +157,15 @@
     <div class="ayah-card">
         <div class="ayah">{{ ayah }}</div>
         <p class="surah-info">(Surah {{ surah_name }}, Ayah {{ ayah_number }})</p>
-        <p id="translation"></p>
+        
+        <!-- Translations: English on the left, Urdu on the right -->
+        <div id="translations" class="translations hidden">
+            <p id="translation_en">{{ translation }}</p>
+            <p id="translation_ur" class="urdu">{{ ur_translation }}</p>
+        </div>
     </div>
 
-    <button class="translate-btn" onclick="getTranslation()">Translate</button>
+    <button class="translate-btn" onclick="toggleTranslation()">Show Translation</button>
 
     <!-- Refresh Button -->
     <button class="refresh-btn" onclick="window.location.reload()">
@@ -145,14 +173,18 @@
     </button>
 
     <script>
-        // Function to fetch translation from the server
-        function getTranslation() {
-            fetch('/get_translation')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("translation").textContent = data.translation;
-                })
-                .catch(error => console.log('Error fetching translation:', error));
+        // Function to toggle translations
+        function toggleTranslation() {
+            const translations = document.getElementById("translations");
+            const translateBtn = document.querySelector(".translate-btn");
+
+            if (translations.classList.contains("hidden")) {
+                translations.classList.remove("hidden");
+                translateBtn.textContent = "Hide Translation";
+            } else {
+                translations.classList.add("hidden");
+                translateBtn.textContent = "Show Translation";
+            }
         }
     </script>
 </body>
